@@ -13,12 +13,12 @@ def main(init_r, mu, sigma, dt, steps):
         print(t, r)
         p = np.random.randn()
         new_r, new_p = generator.leapfrog(r, p, dt)
-        if prob(generator, new_r, new_p, r, p) >= np.random.rand():
+        if prob(generator, new_r, new_p, r, p) >= np.random.random():
             r, p = new_r, new_p
 
 
 if __name__ == '__main__':
     init_r = 0.0
     mu, sigma = 0.0, 2.0
-    dt, steps = 0.01, 100000
+    dt, steps = 0.05, 500000
     main(init_r, mu, sigma, dt, steps)
