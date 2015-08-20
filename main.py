@@ -1,4 +1,4 @@
-import distribution
+import mixed_distribution
 import numpy as np
 
 def prob(generator, new_r, new_p, r, p):
@@ -6,8 +6,8 @@ def prob(generator, new_r, new_p, r, p):
     ham = p * p / 2.0  - np.log( generator.distribution(r) )
     return np.exp(-(new_ham - ham))
 
-def main(init_r, mu, sigma, dt, steps):
-    generator =distribution.NormalDistribution(mu, sigma)
+def main(init_r, num, w, mu, sigma, dt, steps):
+    generator = mixed_distribution.MixedNormalDistribution(num, w, mu, sigma)
     r = init_r
     for t in range(steps):
         print(t, r)
@@ -19,6 +19,9 @@ def main(init_r, mu, sigma, dt, steps):
 
 if __name__ == '__main__':
     init_r = 0.0
-    mu, sigma = 0.0, 2.0
-    dt, steps = 0.05, 500000
-    main(init_r, mu, sigma, dt, steps)
+    num = 2
+    w = [0.3, 0.7]
+    mu = [-4.0, 2.0]
+    sigma = [2.0, 3.0]
+    dt, steps = 0.5, 500000
+    main(init_r, num, w, mu, sigma, dt, steps)
